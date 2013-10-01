@@ -1,22 +1,83 @@
 #voxxen-overlay {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.3);
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    -webkit-animation-name: fadeIn;
+    -moz-animation-name: fadeIn;
+    -o-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 .voxxen-dialogue {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
     -webkit-animation-name: bounceInDown;
     -moz-animation-name: bounceInDown;
     -o-animation-name: bounceInDown;
     animation-name: bounceInDown;
     width: 300px;
     margin: 0 auto;
-    padding-top: 50px;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    font-family: 'Roboto Slab', 'Arial', 'sans-serif';
 }
 
+.voxxen-confirm {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: #ffffff;
+    font-weight: 300;
+    font-family: 'Roboto Slab', 'Arial', 'sans-serif';
+}
+
+.voxxen-content {
+    padding-bottom: 10px;
+}
+
+.voxxen-footer {
+    border-top: 1px solid #ddd;
+    padding: 10px 10px 0 10px;
+    margin: 0 -10px 0 -10px;
+}
+
+/*
+    Credit to https://github.com/daneden/animate.css (Animate.css) for the animations
+*/
 
 @-webkit-keyframes bounceInDown {
     0% {
@@ -96,4 +157,24 @@
     100% {
         transform: translateY(0);
     }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@-moz-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@-o-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
 }

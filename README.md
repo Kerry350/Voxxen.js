@@ -1,4 +1,4 @@
 Voxxen.js
 =========
 
-Pain-free dialogues (alert, prompt and confirm)
+Seriously pain-free dialogues (alert, prompt and confirm)
