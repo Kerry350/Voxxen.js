@@ -24,6 +24,25 @@
 */
 
 (function(root) {
+
+    function addPrefixedEvent(element, type, callback) {
+        var prefixes = ["webkit", "moz", "MS", "o", ""];
+
+        for (var i = 0; i < prefixes.length; i++) {
+            if (!prefixes[i]) type = type.toLowerCase();
+            element.addEventListener(prefixes[i]+type, callback, false);
+        }
+    }
+
+    function removePrefixedEvent(element, type, callback) {
+        var prefixes = ["webkit", "moz", "MS", "o", ""];
+
+        for (var i = 0; i < prefixes.length; i++) {
+            if (!prefixes[i]) type = type.toLowerCase();
+            element.removeEventListener(prefixes[i]+type, callback, false);
+        }
+    }
+
     var DOM = {
         createEl: function(tag) {
             return document.createElement(tag);
@@ -40,11 +59,18 @@
             console.log(document.getElementsByTagName('body')[0])
             document.getElementsByTagName('body')[0].appendChild(overlay);
             overlay.appendChild(this.dialogue);
+            overlay.className = 'fadeIn';
         },
 
         clear: function() {
+            function onAnimationEnd() {
+                removePrefixedEvent(content, "AnimationEnd", onAnimationEnd);
+                content.parentNode.removeChild(content);
+            }
+
             var content = document.getElementById('voxxen-overlay');
-            content.parentNode.removeChild(content);
+            addPrefixedEvent(content, "AnimationEnd", onAnimationEnd);
+            content.className = 'fadeOut';
         },
 
         buildWrapper: function() {
@@ -136,7 +162,7 @@
         init: function() {
 
         },
-
+ 
         build: function() {
 
         }
@@ -186,7 +212,5 @@
     })(); 
 
     root.Voxxen = Voxxen;
-
-
 
 })(window);
