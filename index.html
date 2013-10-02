@@ -21,8 +21,11 @@
     <script>
         Voxxen.alert({
             message: 'This is your alert message',
-            onSubmit: function() {
+            onDecision: function() {
                 alert("Success!");
+            },
+            onHide: function() {
+                alert("Hidden!")
             }
         });
     </script>

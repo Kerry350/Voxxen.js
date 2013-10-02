@@ -2,8 +2,8 @@
 
     Voxxen.alert({
         onShow: fn
-        onDismiss: fn
-        onSubmit: fn
+        onHide: fn
+        onDecision: fn
         animate: boolean
         outerClass: string or array
         message: string
@@ -70,10 +70,14 @@
             function onAnimationEnd() {
                 removePrefixedEvent(content, "AnimationEnd", onAnimationEnd);
                 content.parentNode.removeChild(content);
+                
+                if (this.config.onHide) {
+                    this.config.onHide();
+                }
             }
 
             var content = document.getElementById('voxxen-overlay');
-            addPrefixedEvent(content, "AnimationEnd", onAnimationEnd);
+            addPrefixedEvent(content, "AnimationEnd", onAnimationEnd.bind(this));
             content.classList.remove('fadeIn');
             content.classList.add('fadeOut');
         },
@@ -147,7 +151,7 @@
 
         onConfirm: {
             value: function() {
-                this.config.onSubmit();
+                this.config.onDecision();
                 this.destroy();
             }
         },
