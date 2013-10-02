@@ -219,7 +219,63 @@
     };
 
     var promptDialogue = {
-        
+        build: {
+            value: function() {
+                var outer = this.buildWrapper();
+
+                outer.classList.add('voxxen-alert');
+
+                var text = DOM.createEl('p').appendChild(DOM.createText(this.config.message));
+
+                var input = DOM.createEl('input');
+
+                var confirmButton = DOM.createEl('button');
+                confirmButton.textContent = 'Okay';
+                confirmButton.classList.add('voxxen-confirm');
+
+                var cancelButton = DOM.createEl('button');
+                cancelButton.textContent = 'Cancel';
+                cancelButton.classList.add('voxxen-cancel');
+
+                outer.querySelector('.voxxen-content').appendChild(text);
+                outer.querySelector('.voxxen-content').appendChild(input);
+                outer.querySelector('.voxxen-footer').appendChild(confirmButton);
+                outer.querySelector('.voxxen-footer').appendChild(cancelButton);
+
+                this.dialogue = outer;
+
+                this.addEventListeners();
+            }
+        },
+
+        addEventListeners: {
+            value: function() {
+                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirm.bind(this));
+                this.dialogue.querySelector('.voxxen-cancel').addEventListener('click', this.onCancel.bind(this));
+            }
+        },
+
+        removeEventListeners: {
+            value: function() {
+                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirm.bind(this));
+                this.dialogue.querySelector('.voxxen-cancel').removeEventListener('click', this.onCancel.bind(this));
+            }
+        },
+
+        onConfirm: {
+            value: function() {
+                var value = this.dialogue.querySelector('input').value.trim();
+                this.config.onDecision(value);
+                this.destroy();
+            }
+        },
+
+        onCancel: {
+            value: function() {
+                this.config.onDecision(false);
+                this.destroy();
+            }
+        } 
     };
 
     var Voxxen = (function() {
