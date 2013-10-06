@@ -57,8 +57,11 @@
         }
     };
 
+    var id = 0;
+
     var baseDialogue = {
         init: function(options) {
+            this.id = id++;
             this.config = options;
             this.build();
             this.show();
@@ -67,7 +70,6 @@
 
         show: function() {
             var overlay = this.createOverlay();
-            console.log(document.getElementsByTagName('body')[0])
             document.getElementsByTagName('body')[0].appendChild(overlay);
             overlay.appendChild(this.dialogue);
             overlay.classList.add('fadeIn');
@@ -85,7 +87,7 @@
 
             var onAnimationEndHandler = onAnimationEnd.bind(this);
 
-            var content = document.getElementById('voxxen-overlay');
+            var content = document.getElementsByClassName('voxxen-overlay-' + (this.id))[0];
             addPrefixedEvent(content, "AnimationEnd", onAnimationEndHandler);
             content.classList.remove('fadeIn');
             content.classList.add('fadeOut');
@@ -109,7 +111,8 @@
 
         createOverlay: function() {
             var overlay = DOM.createEl('div');
-            overlay.id = 'voxxen-overlay';
+            overlay.classList.add('voxxen-overlay');
+            overlay.classList.add('voxxen-overlay-' + (this.id));
             return overlay;
         },
 
@@ -170,7 +173,7 @@
             value: function() {
                 var outer = this.buildWrapper();
 
-                outer.classList.add('voxxen-alert');
+                outer.classList.add('voxxen-confirmation');
 
                 var text = DOM.createEl('p').appendChild(DOM.createText(this.config.message));
 
@@ -228,7 +231,7 @@
             value: function() {
                 var outer = this.buildWrapper();
 
-                outer.classList.add('voxxen-alert');
+                outer.classList.add('voxxen-prompt');
 
                 var text = DOM.createEl('p').appendChild(DOM.createText(this.config.message));
 
@@ -289,7 +292,6 @@
 
         function createAlert(options) {
             var alert = Object.create(baseDialogue, alertDialogue);
-            console.log(alert)
             return alert.init(options);
         }
 

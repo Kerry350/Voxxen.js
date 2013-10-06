@@ -1,4 +1,4 @@
-#voxxen-overlay {
+.voxxen-overlay {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.3);
     top: 0;
@@ -37,7 +37,8 @@
     font-family: 'Roboto Slab', 'Arial', 'sans-serif';
 }
 
-.voxxen-confirm {
+.voxxen-confirm, 
+.voxxen-cancel {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -54,21 +55,54 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+    font-weight: 300;
+    font-family: 'Roboto Slab', 'Arial', 'sans-serif';
+    float: right;
+}
+
+.voxxen-confirm {
     background-color: #5cb85c;
     border-color: #4cae4c;
     color: #ffffff;
-    font-weight: 300;
-    font-family: 'Roboto Slab', 'Arial', 'sans-serif';
+}
+
+.voxxen-cancel {
+    color: #ffffff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
 }
 
 .voxxen-content {
     padding-bottom: 10px;
 }
 
+.voxxen-prompt input {
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transition: border-color ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s;
+}
+
+.voxxen-prompt input:focus {
+    border-color: #66afe9;
+    outline: 0;
+}
+
 .voxxen-footer {
     border-top: 1px solid #ddd;
     padding: 10px 10px 0 10px;
     margin: 0 -10px 0 -10px;
+    overflow: hidden; /* Used as a clearfix */
 }
 
 /*
