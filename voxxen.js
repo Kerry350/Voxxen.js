@@ -75,7 +75,7 @@
 
         clear: function() {
             function onAnimationEnd() {
-                removePrefixedEvent(content, "AnimationEnd", onAnimationEnd);
+                removePrefixedEvent(content, "AnimationEnd", onAnimationEndHandler);
                 content.parentNode.removeChild(content);
                 
                 if (this.config.onHide) {
@@ -83,8 +83,10 @@
                 }
             }
 
+            var onAnimationEndHandler = onAnimationEnd.bind(this);
+
             var content = document.getElementById('voxxen-overlay');
-            addPrefixedEvent(content, "AnimationEnd", onAnimationEnd.bind(this));
+            addPrefixedEvent(content, "AnimationEnd", onAnimationEndHandler);
             content.classList.remove('fadeIn');
             content.classList.add('fadeOut');
         },
@@ -144,13 +146,14 @@
 
         addEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirm.bind(this));
+                this.onConfirmHandler = this.onConfirm.bind(this);
+                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirmHandler);
             }
         },
 
         removeEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirm.bind(this));
+                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirmHandler);
             }
         },
 
@@ -191,15 +194,17 @@
 
         addEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirm.bind(this));
-                this.dialogue.querySelector('.voxxen-cancel').addEventListener('click', this.onCancel.bind(this));
+                this.onConfirmHandler = this.onConfirm.bind(this);
+                this.onCancelHandler = this.onCancel.bind(this);
+                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirmHandler);
+                this.dialogue.querySelector('.voxxen-cancel').addEventListener('click', this.onCancelHandler);
             }
         },
 
         removeEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirm.bind(this));
-                this.dialogue.querySelector('.voxxen-cancel').removeEventListener('click', this.onCancel.bind(this));
+                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirmHandler);
+                this.dialogue.querySelector('.voxxen-cancel').removeEventListener('click', this.onCancelHandler);
             }
         },
 
@@ -250,15 +255,17 @@
 
         addEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirm.bind(this));
-                this.dialogue.querySelector('.voxxen-cancel').addEventListener('click', this.onCancel.bind(this));
+                this.onConfirmHandler = this.onConfirm.bind(this);
+                this.onCancelHandler = this.onCancel.bind(this);
+                this.dialogue.querySelector('.voxxen-confirm').addEventListener('click', this.onConfirmHandler);
+                this.dialogue.querySelector('.voxxen-cancel').addEventListener('click', this.onCancelHandler);
             }
         },
 
         removeEventListeners: {
             value: function() {
-                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirm.bind(this));
-                this.dialogue.querySelector('.voxxen-cancel').removeEventListener('click', this.onCancel.bind(this));
+                this.dialogue.querySelector('.voxxen-confirm').removeEventListener('click', this.onConfirmHandler);
+                this.dialogue.querySelector('.voxxen-cancel').removeEventListener('click', this.onCancelHandler);
             }
         },
 
